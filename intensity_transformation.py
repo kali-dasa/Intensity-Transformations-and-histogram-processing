@@ -29,3 +29,21 @@ for i in range(0, im.size[0] - 1):
 
 plt.imshow(im) 
 plt.show()
+
+"""2. Point/Intensity transformation: Log transformation"""
+
+from PIL import Image
+import numpy as np
+import matplotlib.pylab as plt
+im_g = im.convert('L')
+plt.imshow(im_g)
+
+im_g=np.array(im_g)
+
+c = 255/(np.log(1 + np.max(im_g))) 
+log_transformed = c * np.log(1 + im_g) 
+  
+log_transformed = np.array(log_transformed, dtype = np.uint8) 
+  
+plt.title("log transformation")
+plt.imshow(log_transformed, cmap=plt.cm.gray)
