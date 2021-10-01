@@ -47,3 +47,43 @@ log_transformed = np.array(log_transformed, dtype = np.uint8)
   
 plt.title("log transformation")
 plt.imshow(log_transformed, cmap=plt.cm.gray)
+
+"""3. Histogram Processing
+
+from PIL import Image
+import numpy as np
+import matplotlib.pylab as plt
+im = Image.open("/content/parrot.jpg") # RGB input image
+im_r, im_g, im_b = im.split() # To split the RGB image into 3 channels
+plt.style.use('ggplot')
+plt.figure(figsize=(15,5))
+plt.subplot(121)
+plt.imshow(im, cmap='gray')
+plt.title('original image', size=20)
+plt.axis('off')
+plt.subplot(122)
+# Use the function here to plot histogram of im_r
+# Use the function here to plot histogram of im_g
+# Use the function here to plot histogram of im_b
+img = cv2.imread("/content/parrot.jpg")
+color = ('b','g','r')
+for i,col in enumerate(color):
+    histr = cv2.calcHist([img],[i],None,[256],[0,256])
+    plt.plot(histr,color = col)
+    plt.xlim([0,256])
+plt.xlabel('pixel value', size=20)
+plt.ylabel('frequency', size=20)
+plt.title('histogram for RGB channels', size=20)
+plt.show()
+
+from PIL import Image
+import numpy as np
+import matplotlib.pylab as plt
+im = Image.open("/content/parrot.jpg") # RGB input image
+im_r, im_g, im_b = im.split() # To split the RGB image into 3 channels
+
+plt.imshow(im_r)
+
+plt.imshow(im_g)
+
+plt.imshow(im_b)
