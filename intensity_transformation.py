@@ -87,3 +87,29 @@ plt.imshow(im_r)
 plt.imshow(im_g)
 
 plt.imshow(im_b)
+
+""" 3.1) Histogram Equalization """
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+from skimage.exposure import equalize_hist
+img = cv2.imread("/content/parrot.jpg")
+plt.imshow(img)
+
+color = ('b','g','r')
+for i,col in enumerate(color):
+    histr = cv2.calcHist([img],[i],None,[256],[0,256])
+    plt.plot(histr,color = col)
+    plt.xlim([0,256])
+plt.show()
+
+eq = np.float32(equalize_hist(img))
+plt.imshow(eq)
+
+color = ('b','g','r')
+for i,col in enumerate(color):
+    histr = cv2.calcHist([eq],[i],None,[256],[0,256])
+    plt.plot(histr,color = col)
+    plt.xlim([0,256])
+plt.show()
+
