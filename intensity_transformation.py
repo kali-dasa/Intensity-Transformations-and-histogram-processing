@@ -113,3 +113,21 @@ for i,col in enumerate(color):
     plt.xlim([0,256])
 plt.show()
 
+"""4. Contrast Stretching:
+Write a program for contrast stretching of an RGB image and then draw the
+histograms of R,G,B channels of output image. The following section describes how to
+implement contrast-stretching using the PIL library.
+"""
+
+from PIL import Image, ImageEnhance
+img = Image.open("/content/parrot.jpg")
+new=ImageEnhance.Contrast(img)
+res=new.enhance(2)
+plt.imshow(res)
+
+color = ('b','g','r')
+for i,col in enumerate(color):
+    histr = cv2.calcHist([np.float32(res)],[i],None,[255],[0,255])
+    plt.plot(histr,color = col)
+    plt.xlim([0,255])
+plt.show()
